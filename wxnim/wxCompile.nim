@@ -64,7 +64,7 @@ elif defined(gcc) or defined(clang):
       {.passC: "-I\"" & (wxWidgetsPath / "include") & "\"".}
       const wxWidgetsLibPath: string = wxWidgetsPath / "lib" / "gcc_lib"
       when defined(windows):
-        {.passC: "/I\"" & (wxWidgetsLibPath / "mswu") & "\"".}
+        {.passC: "-I\"" & (wxWidgetsLibPath / "mswu") & "\"".}
         {.passL: "\"" & (wxWidgetsLibPath / "wxmsw30u_adv.a") & "\"".}
         {.passL: "\"" & (wxWidgetsLibPath / "wxmsw30u_aui.a") & "\"".}
         {.passL: "\"" & (wxWidgetsLibPath / "wxmsw30u_core.a") & "\"".}
@@ -90,8 +90,10 @@ elif defined(gcc) or defined(clang):
       {.passL: "\"" & (wxWidgetsLibPath / "wxzlib.a") & "\"".}
     else: # not defined(wxWidgetsPath)
       # Assume wxWidgets lib library included in linker library directory path
-      {.passL: "wxmsw30u_adv.a wxmsw30u_aui.a wxmsw30u_core.a wxmsw30u_gl.a wxmsw30u_html.a wxmsw30u_media.a wxmsw30u_propgrid.a wxmsw30u_qa.a wxmsw30u_ribbon.a wxmsw30u_richtext.a wxmsw30u_stc.a wxmsw30u_webview.a wxmsw30u_xrc.a".}
-      {.passL: "wxbase30u.a wxbase30u_net.a wxbase30u_xml.a wxexpat.a wxjpeg.a wxpng.a wxregexu.a wxscintilla.a wxtiff.a wxzlib.a".}
+      # {.passL: "wxmsw30u_adv.a wxmsw30u_aui.a wxmsw30u_core.a wxmsw30u_gl.a wxmsw30u_html.a wxmsw30u_media.a wxmsw30u_propgrid.a wxmsw30u_qa.a wxmsw30u_ribbon.a wxmsw30u_richtext.a wxmsw30u_stc.a wxmsw30u_webview.a wxmsw30u_xrc.a".}
+      {.passL: "-lwx_mswu_adv-3.1 -lwx_mswu_aui-3.1 -lwx_mswu_core-3.1 -lwx_mswu_gl-3.1 -lwx_mswu_html-3.1 -lwx_mswu_media-3.1 -lwx_mswu_propgrid-3.1 -lwx_mswu_qa-3.1 -lwx_mswu_ribbon-3.1 -lwx_mswu_richtext-3.1 -lwx_mswu_stc-3.1 -lwx_mswu_webview-3.1 -lwx_mswu_xrc-3.1".}
+      # {.passL: "wxbase30u.a wxbase30u_net.a wxbase30u_xml.a wxexpat.a wxjpeg.a wxpng.a wxregexu.a wxscintilla.a wxtiff.a wxzlib.a".}
+      {.passL: "-lwx_baseu-3.1 -lwx_baseu_net-3.1 -lwx_baseu_xml-3.1 -lwxregexu-3.1 -lwxscintilla-3.1".}
   else: # not defined(windows)
     const wxConfig =
       when defined(wxWidgetsPath):

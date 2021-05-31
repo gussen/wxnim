@@ -3,7 +3,7 @@
 discard "forward decl of wxScrollHelperEvtHandler"
 discard "forward decl of wxTimer"
 const
-  wxScrolledWindowStyle* = (wxHSCROLL or wxVSCROLL).clong
+  wxScrolledWindowStyle* = cast[clong] (wxHSCROLL or wxVSCROLL).clong
 
 
 type
@@ -12,10 +12,10 @@ type
     wxSHOW_SB_NEVER = - 1, wxSHOW_SB_DEFAULT, wxSHOW_SB_ALWAYS
 
 
-#[ 
+#[
 type
   WxAnyScrollHelperBase* {.importcpp: "wxAnyScrollHelperBase", header: wxh.} = object
-  
+
 
 proc constructwxAnyScrollHelperBase*(win: ptr WxWindow): WxAnyScrollHelperBase {.
     cdecl, constructor, importcpp: "wxAnyScrollHelperBase(@)", header: wxh.}
@@ -36,7 +36,7 @@ proc handleOnPaint*(this: var WxAnyScrollHelperBase; event: var WxPaintEvent) {.
 
 type
   WxScrollHelperBase* {.importcpp: "wxScrollHelperBase", header: wxh.} = object of WxAnyScrollHelperBase
-  
+
 
 proc constructwxScrollHelperBase*(winToScroll: ptr WxWindow): WxScrollHelperBase {.
     cdecl, constructor, importcpp: "wxScrollHelperBase(@)", header: wxh.}
@@ -129,7 +129,7 @@ proc handleOnChildFocus*(this: var WxScrollHelperBase; event: var WxChildFocusEv
 
 type
   WxScrolledT_Helper* {.importcpp: "wxScrolledT_Helper", header: wxh.} = object
-  
+
 
 proc filterBestSize*(win: ptr WxWindow; helper: ptr WxScrollHelper; origBest: WxSize): WxSize {.
     cdecl, importcpp: "wxScrolledT_Helper::FilterBestSize(@)", header: wxh.}
@@ -145,7 +145,7 @@ type
 
 type
   WxScrolled* {.importcpp: "wxScrolled", header: wxh.}[T] = object of T
-  
+
 
 proc constructwxScrolled*[T](): WxScrolled[T] {.cdecl, constructor,
     importcpp: "wxScrolled(@)", header: wxh.}
@@ -164,7 +164,7 @@ proc create*[T](this: var WxScrolled[T]; parent: ptr WxWindow; winid: WxWindowID
 type
   WxScrolledWindow* {.importcpp: "wxScrolledWindow", header: wxh.} = object of WxScrolled[
       WxPanel]
-  
+
 
 proc constructwxScrolledWindow*(): WxScrolledWindow {.cdecl, constructor,
     importcpp: "wxScrolledWindow(@)", header: wxh.}

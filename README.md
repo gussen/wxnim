@@ -3,6 +3,16 @@ Nim wrapper for wxWidgets. Most common widgets have been wrapped but there are s
 
 Still in development, is shown to work fine, but needs more testing!
 
+This clone has some changes to make it work with Nim 1.4.8 and the latest Windows/MinGW64 wxWidgets package: mingw-w64-x86_64-wxmsw3.1 3.1.5-1. To install it open a MinGW64 shell and run:
+
+```
+pacman -Syu
+# Maybe restart and run
+pacman -Su
+pacman -S mingw-w64-x86_64-wxmsw3.1
+nimble install https://github.com/gussen/wxnim
+```
+
 - [wxnim](#wxnim)
 - [Installation](#installation)
   * [Installation on Linux](#installation-on-linux)
@@ -165,4 +175,3 @@ run ``nim c -r scripts/convert``. However since the files have later been modifi
 
 - Make event handling support Nim's closures.
 - Make the interface even more Nim-like
-
